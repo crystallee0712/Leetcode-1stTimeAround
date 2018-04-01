@@ -1,0 +1,61 @@
+Given an array and a value, remove all instances of that value in-place and return the new length.
+
+Do not allocate extra space for another array, you must do this by modifying the input array in-place with O(1) extra memory.
+
+The order of elements can be changed. It doesn't matter what you leave beyond the new length.
+
+Example:
+
+Given nums = [3,2,2,3], val = 3,
+
+Your function should return length = 2, with the first two elements of nums being 2.
+
+Java:
+
+Two pointers: time O(n), space O(1)
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int i = 0;
+        for (int j = 0; j < nums.length; j++) {
+            if (nums[j]!= val){
+                nums[i] = nums[j];
+                i++;
+            }              
+        }
+        return i;
+    }
+}
+
+Reduce array size using two pointers:
+
+class Solution {
+    public int removeElement(int[] nums, int val) {
+        int i = 0;
+        int j = nums.length; //assign array length to a variable so that it can be modified, can't modify array length directly.
+        while (i < j) {
+            if (nums[i] == val){
+                nums[i] = nums[j-1];
+                j--;
+            } 
+            else
+                i++;
+        }
+        return nums.length;
+    }
+}
+
+Python
+
+class Solution(object):
+    def removeElement(self, nums, val):
+        """
+        :type nums: List[int]
+        :type val: int
+        :rtype: int
+        """
+        for i in nums[:]: //colone the list first, modify on the child list
+            if i == val:
+                nums.remove(i)
+        return len(nums)
+        
